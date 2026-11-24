@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Nyx
-  text: All-in-One Discord Bot Documentation
-  tagline: Moderation, server economy, multiplayer mini-games, autoresponders, leveling, media processing, and utilities — powered by slash and prefix commands.
+  text: Documentation
+  tagline: Moderation, server economy, multiplayer mini-games, autoresponders, leveling, media processing, and utilities,powered by slash and prefix commands
   actions:
     - theme: brand
       text: Getting Started

@@ -54,6 +54,13 @@ export default defineConfig({
           { text: 'Frequently Asked Questions', link: '/faq/faq' },
         ],
       },
+      {
+        text: 'Legal',
+        items: [
+          { text: 'Terms & Conditions', link: '/legal/terms' },
+          { text: 'Privacy Policy', link: '/legal/privacy' },
+        ],
+      },
     ],
 
     socialLinks: [
@@ -65,7 +72,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Documentation for the Nyx Discord bot.',
+      message:
+        'Documentation for the Nyx Discord bot · <a href="/nyx_docs/legal/terms">Terms & Conditions</a> · <a href="/nyx_docs/legal/privacy">Privacy Policy</a>',
       copyright: 'Hosted with VitePress & GitHub Pages',
     },
   },
