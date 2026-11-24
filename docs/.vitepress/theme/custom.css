@@ -1,0 +1,67 @@
+:root {
+  --nyx-purple: #9333ea;
+  --nyx-purple-bright: #a855f7;
+  --nyx-teal: #0d9488;
+  --nyx-teal-bright: #14b8a6;
+  --nyx-glow: rgba(147, 51, 234, 0.25);
+  --nyx-hover-glow: rgba(20, 184, 166, 0.45);
+}
+
+.dark {
+  --nyx-purple: #a855f7;
+  --nyx-purple-bright: #c084fc;
+  --nyx-teal: #14b8a6;
+  --nyx-teal-bright: #2dd4bf;
+  --nyx-glow: rgba(168, 85, 247, 0.35);
+  --nyx-hover-glow: rgba(45, 212, 191, 0.55);
+}
+
+/* Shared purple-to-(teal->purple) hover effect for every "Nyx" instance */
+.nyx-brand,
+.VPNavBarTitle .title > span,
+.VPHero .name.clip {
+  display: inline-block;
+  color: var(--nyx-purple);
+  background-image: linear-gradient(
+    90deg,
+    var(--nyx-teal-bright) 0%,
+    var(--nyx-teal) 28%,
+    var(--nyx-purple-bright) 58%,
+    var(--nyx-purple) 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 6px var(--nyx-glow));
+  transition:
+    background-position 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.35s ease;
+}
+
+.nyx-brand {
+  font-weight: 600;
+}
+
+/* Keep heading font-weight when Nyx appears inside h1-h6 */
+.vp-doc h1 .nyx-brand,
+.vp-doc h2 .nyx-brand,
+.vp-doc h3 .nyx-brand,
+.vp-doc h4 .nyx-brand {
+  font-weight: inherit;
+}
+
+/* Hover: smoothly transitions to a teal-to-purple gradient with glow */
+.nyx-brand:hover,
+.VPNavBarTitle .title:hover > span,
+.VPHero .name.clip:hover {
+  background-position: 0% 50%;
+  filter: drop-shadow(0 0 10px var(--nyx-hover-glow));
+}
+
+/* Also trigger when hovering a link containing Nyx */
+a:hover .nyx-brand {
+  background-position: 0% 50%;
+  filter: drop-shadow(0 0 10px var(--nyx-hover-glow));
+}

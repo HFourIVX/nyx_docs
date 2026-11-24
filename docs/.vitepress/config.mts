@@ -7,6 +7,39 @@ export default defineConfig({
     'Documentation for Nyx, a feature-rich Discord bot for moderation, economy, mini-games, leveling, media, and utilities.',
   lastUpdated: true,
 
+  markdown: {
+    config(md) {
+      md.core.ruler.push('nyx_brand', (state) => {
+        for (const token of state.tokens) {
+          if (token.type !== 'inline' || !token.children) continue
+
+          const newChildren: typeof token.children = []
+          for (const child of token.children) {
+            if (child.type !== 'text' || !/\bNyx\b/.test(child.content)) {
+              newChildren.push(child)
+              continue
+            }
+
+            const parts = child.content.split(/(\bNyx\b)/)
+            for (const part of parts) {
+              if (!part) continue
+              if (part === 'Nyx') {
+                const htmlToken = new state.Token('html_inline', '', 0)
+                htmlToken.content = '<span class="nyx-brand">Nyx</span>'
+                newChildren.push(htmlToken)
+              } else {
+                const textToken = new state.Token('text', '', 0)
+                textToken.content = part
+                newChildren.push(textToken)
+              }
+            }
+          }
+          token.children = newChildren
+        }
+      })
+    },
+  },
+
   themeConfig: {
     siteTitle: 'Nyx',
 
@@ -73,7 +106,7 @@ export default defineConfig({
 
     footer: {
       message:
-        'Documentation for the Nyx Discord bot · <a href="/nyx_docs/legal/terms">Terms & Conditions</a> · <a href="/nyx_docs/legal/privacy">Privacy Policy</a>',
+        'Documentation for the <span class="nyx-brand">Nyx</span> Discord bot · <a href="/nyx_docs/legal/terms">Terms & Conditions</a> · <a href="/nyx_docs/legal/privacy">Privacy Policy</a>',
       copyright: 'Hosted with VitePress & GitHub Pages',
     },
   },
