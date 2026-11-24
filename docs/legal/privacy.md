@@ -75,7 +75,7 @@ Nyx is not directed to individuals under the minimum age required to use Discord
 
 ## 7. Contact
 
-For privacy questions, data access inquiries, or deletion requests, please reach out via the [Nyx Documentation GitHub repository](https://github.com/HFourIVX/nyx_docs).
+For privacy questions, data access inquiries, or deletion requests, please join our [Discord Support Server](https://discord.gg/Ut2XcQ3GQV).
 
 ---
 

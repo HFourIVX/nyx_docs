@@ -69,4 +69,4 @@ We may update these Terms from time to time. Changes take effect once published 
 
 ## 9. Contact
 
-If you have questions about these Terms or need to report abuse, please open an issue or reach out via the [Nyx Documentation GitHub repository](https://github.com/HFourIVX/nyx_docs).
+If you have questions about these Terms or need to report abuse, please join our [Discord Support Server](https://discord.gg/Ut2XcQ3GQV).

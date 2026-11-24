@@ -25,7 +25,7 @@ export default defineConfig({
               if (!part) continue
               if (part === 'Nyx') {
                 const htmlToken = new state.Token('html_inline', '', 0)
-                htmlToken.content = '<span class="nyx-brand">Nyx</span>'
+                htmlToken.content = '<span class="nyx-brand" data-text="Nyx">Nyx</span>'
                 newChildren.push(htmlToken)
               } else {
                 const textToken = new state.Token('text', '', 0)
@@ -97,6 +97,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
+      { icon: 'discord', link: 'https://discord.gg/Ut2XcQ3GQV' },
       { icon: 'github', link: 'https://github.com/HFourIVX/nyx_docs' },
     ],
 
@@ -106,7 +107,7 @@ export default defineConfig({
 
     footer: {
       message:
-        'Documentation for the <span class="nyx-brand">Nyx</span> Discord bot · <a href="/nyx_docs/legal/terms">Terms & Conditions</a> · <a href="/nyx_docs/legal/privacy">Privacy Policy</a>',
+        'Documentation for the <span class="nyx-brand" data-text="Nyx">Nyx</span> Discord bot · <a href="https://discord.gg/Ut2XcQ3GQV" target="_blank" rel="noopener">Support Server</a> · <a href="/nyx_docs/legal/terms">Terms & Conditions</a> · <a href="/nyx_docs/legal/privacy">Privacy Policy</a>',
       copyright: 'Hosted with VitePress & GitHub Pages',
     },
   },

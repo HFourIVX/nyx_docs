@@ -1,50 +1,109 @@
 :root {
+  --vp-c-brand-1: #9333ea;
+  --vp-c-brand-2: #a855f7;
+  --vp-c-brand-3: #7e22ce;
+
   --nyx-purple: #9333ea;
   --nyx-purple-bright: #a855f7;
   --nyx-teal: #0d9488;
   --nyx-teal-bright: #14b8a6;
-  --nyx-glow: rgba(147, 51, 234, 0.25);
-  --nyx-hover-glow: rgba(20, 184, 166, 0.45);
+
+  --nyx-text-glow:
+    0 0 8px rgba(147, 51, 234, 0.55),
+    0 0 18px rgba(168, 85, 247, 0.38);
+  --nyx-text-glow-hover:
+    0 0 8px rgba(20, 184, 166, 0.7),
+    0 0 18px rgba(20, 184, 166, 0.45),
+    0 0 28px rgba(147, 51, 234, 0.4);
+  --nyx-hero-glow:
+    0 0 18px rgba(147, 51, 234, 0.55),
+    0 0 42px rgba(168, 85, 247, 0.38),
+    0 0 84px rgba(147, 51, 234, 0.24);
+  --nyx-hero-glow-hover:
+    0 0 22px rgba(20, 184, 166, 0.7),
+    0 0 50px rgba(20, 184, 166, 0.45),
+    0 0 92px rgba(147, 51, 234, 0.35);
+  --nyx-aura-rest: radial-gradient(
+    circle,
+    rgba(147, 51, 234, 0.16) 0%,
+    rgba(168, 85, 247, 0.06) 45%,
+    transparent 70%
+  );
+  --nyx-aura-hover: radial-gradient(
+    circle,
+    rgba(20, 184, 166, 0.22) 0%,
+    rgba(147, 51, 234, 0.12) 45%,
+    transparent 70%
+  );
 }
 
 .dark {
+  --vp-c-brand-1: #c084fc;
+  --vp-c-brand-2: #a855f7;
+  --vp-c-brand-3: #9333ea;
+
   --nyx-purple: #a855f7;
   --nyx-purple-bright: #c084fc;
   --nyx-teal: #14b8a6;
   --nyx-teal-bright: #2dd4bf;
-  --nyx-glow: rgba(168, 85, 247, 0.35);
-  --nyx-hover-glow: rgba(45, 212, 191, 0.55);
+
+  --nyx-text-glow:
+    0 0 8px rgba(192, 132, 252, 0.85),
+    0 0 18px rgba(168, 85, 247, 0.65),
+    0 0 32px rgba(147, 51, 234, 0.45);
+  --nyx-text-glow-hover:
+    0 0 10px rgba(45, 212, 191, 0.95),
+    0 0 22px rgba(20, 184, 166, 0.7),
+    0 0 38px rgba(168, 85, 247, 0.55);
+  --nyx-hero-glow:
+    0 0 20px rgba(192, 132, 252, 0.9),
+    0 0 46px rgba(168, 85, 247, 0.7),
+    0 0 90px rgba(147, 51, 234, 0.48);
+  --nyx-hero-glow-hover:
+    0 0 24px rgba(45, 212, 191, 0.95),
+    0 0 56px rgba(20, 184, 166, 0.72),
+    0 0 100px rgba(168, 85, 247, 0.58);
+  --nyx-aura-rest: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.28) 0%,
+    rgba(147, 51, 234, 0.1) 45%,
+    transparent 70%
+  );
+  --nyx-aura-hover: radial-gradient(
+    circle,
+    rgba(45, 212, 191, 0.28) 0%,
+    rgba(168, 85, 247, 0.16) 45%,
+    transparent 70%
+  );
 }
 
-/* Shared purple-to-(teal->purple) hover effect for every "Nyx" instance */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   Two-layer cross-browser glow & teal-to-purple hover for every "Nyx"
+   Base layer renders text-shadow glow; ::after renders the clipped gradient.
+   ========================================================================== */
 .nyx-brand,
 .VPNavBarTitle .title > span,
-.VPHero .name.clip {
+.VPHome .VPHero.VPHomeHero .name.clip {
+  position: relative;
   display: inline-block;
-  color: var(--nyx-purple);
-  background-image: linear-gradient(
-    90deg,
-    var(--nyx-teal-bright) 0%,
-    var(--nyx-teal) 28%,
-    var(--nyx-purple-bright) 58%,
-    var(--nyx-purple) 100%
-  );
-  background-size: 260% 100%;
-  background-position: 100% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
+  white-space: nowrap;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: transparent;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 6px var(--nyx-glow));
-  transition:
-    background-position 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.35s ease;
+  text-shadow: var(--nyx-text-glow);
+  transition: text-shadow 0.35s ease;
 }
 
 .nyx-brand {
   font-weight: 600;
 }
 
-/* Keep heading font-weight when Nyx appears inside h1-h6 */
 .vp-doc h1 .nyx-brand,
 .vp-doc h2 .nyx-brand,
 .vp-doc h3 .nyx-brand,
@@ -52,16 +111,251 @@
   font-weight: inherit;
 }
 
-/* Hover: smoothly transitions to a teal-to-purple gradient with glow */
-.nyx-brand:hover,
-.VPNavBarTitle .title:hover > span,
-.VPHero .name.clip:hover {
-  background-position: 0% 50%;
-  filter: drop-shadow(0 0 10px var(--nyx-hover-glow));
+.nyx-brand::selection,
+.VPNavBarTitle .title > span::selection,
+.VPHome .VPHero.VPHomeHero .name.clip::selection {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background: rgba(168, 85, 247, 0.45);
 }
 
-/* Also trigger when hovering a link containing Nyx */
-a:hover .nyx-brand {
+.nyx-brand::after,
+.VPNavBarTitle .title > span::after,
+.VPHome .VPHero.VPHomeHero .name.clip::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow: none;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    90deg,
+    var(--nyx-teal-bright) 0%,
+    var(--nyx-teal) 16%,
+    var(--nyx-purple-bright) 38%,
+    var(--nyx-purple) 60%,
+    var(--nyx-purple) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 50%;
+  transition: background-position 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.VPNavBarTitle .title > span::after,
+.VPHome .VPHero.VPHomeHero .name.clip::after {
+  content: 'Nyx';
+}
+
+.nyx-brand:hover,
+a:hover .nyx-brand,
+.VPNavBarTitle .title:hover > span {
+  text-shadow: var(--nyx-text-glow-hover);
+}
+
+.nyx-brand:hover::after,
+a:hover .nyx-brand::after,
+.VPNavBarTitle .title:hover > span::after,
+.VPHome .VPHero.VPHomeHero .name.clip:hover::after {
   background-position: 0% 50%;
-  filter: drop-shadow(0 0 10px var(--nyx-hover-glow));
+}
+
+/* ==========================================================================
+   Full-screen Landing Hero
+   ========================================================================== */
+.VPHome .VPHero.VPHomeHero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc((var(--vp-nav-height) + var(--vp-layout-top-height, 0px)) * -1);
+  padding: var(--vp-nav-height) 24px 48px;
+}
+
+.VPHome .VPHero.VPHomeHero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(680px, 90vw);
+  height: min(680px, 90vw);
+  transform: translate(-50%, -50%);
+  background: var(--nyx-aura-rest);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.45s ease, transform 0.45s ease;
+}
+
+.VPHome .VPHero.VPHomeHero:has(.name.clip:hover)::before {
+  background: var(--nyx-aura-hover);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.VPHome .VPHero.VPHomeHero .container {
+  position: static;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.VPHome .VPHero.VPHomeHero .main {
+  position: static;
+  flex-grow: 0;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.VPHome .VPHero.VPHomeHero .heading {
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.VPHome .VPHero.VPHomeHero .name.clip {
+  font-size: clamp(4.5rem, 15vw, 9.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  max-width: none;
+  width: fit-content;
+  margin: 0;
+  text-shadow: var(--nyx-hero-glow);
+  cursor: default;
+}
+
+.VPHome .VPHero.VPHomeHero .name.clip:hover {
+  text-shadow: var(--nyx-hero-glow-hover);
+}
+
+/* Small "Add to your server" button */
+.VPHome .VPHero.VPHomeHero .actions {
+  justify-content: center;
+  padding-top: 28px;
+  margin: 0;
+}
+
+.VPHome .VPHero.VPHomeHero .action {
+  padding: 0;
+}
+
+.VPHome .VPHero.VPHomeHero .VPButton.brand {
+  padding: 0 18px;
+  line-height: 34px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: rgba(147, 51, 234, 0.14);
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  color: #7e22ce;
+  box-shadow: 0 0 18px rgba(147, 51, 234, 0.25);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.dark .VPHome .VPHero.VPHomeHero .VPButton.brand {
+  background: rgba(168, 85, 247, 0.16);
+  border-color: rgba(192, 132, 252, 0.55);
+  color: #f3e8ff;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+}
+
+.VPHome .VPHero.VPHomeHero .VPButton.brand:hover {
+  border-color: var(--nyx-teal-bright);
+  background: linear-gradient(
+    90deg,
+    rgba(20, 184, 166, 0.22),
+    rgba(168, 85, 247, 0.24)
+  );
+  color: #115e59;
+  box-shadow:
+    0 0 22px rgba(45, 212, 191, 0.45),
+    0 0 38px rgba(168, 85, 247, 0.35);
+  transform: translateY(-1px);
+}
+
+.dark .VPHome .VPHero.VPHomeHero .VPButton.brand:hover {
+  color: #ffffff;
+}
+
+/* Minimal scroll-down cue anchored to the bottom of the full-screen hero */
+.nyx-scroll-cue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  color: var(--vp-c-text-2);
+  opacity: 0.7;
+  transition: opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  animation: nyx-bob 2.2s ease-in-out infinite;
+}
+
+.nyx-scroll-cue:hover {
+  opacity: 1;
+  color: var(--nyx-teal-bright);
+}
+
+@keyframes nyx-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+/* ==========================================================================
+   Below-the-fold Features Section
+   ========================================================================== */
+.nyx-features-anchor {
+  scroll-margin-top: var(--vp-nav-height);
+}
+
+.VPHome .VPHomeFeatures {
+  padding-top: 72px;
+  padding-bottom: 32px;
+}
+
+.VPHome .VPHomeFeatures .VPFeature {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
+}
+
+.VPHome .VPHomeFeatures .VPFeature:hover {
+  border-color: rgba(168, 85, 247, 0.55);
+  box-shadow:
+    0 0 24px rgba(168, 85, 247, 0.16),
+    0 0 12px rgba(45, 212, 191, 0.1);
+  transform: translateY(-2px);
 }
